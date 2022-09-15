@@ -1,20 +1,28 @@
 import './style.css';
-import React, { useState } from 'react';
+import React, { useState ,useEffect} from 'react';
 import { Table, Button, Modal, Form } from "react-bootstrap";
 
 export default function TableData() {
     const [show, handleShow] = useState(false);
+    const [item, setItem] =useState([]);
+
 
     const handleState = (status) => {
         handleShow(!show);
     };
 
-    const Remove = () => {
-        localStorage.removeItem('UserName');
-        localStorage.removeItem('Email');
-        localStorage.removeItem('Password');
-    };
-   
+ 
+    useEffect(() => {
+        const items = JSON.parse(localStorage.getItem('FormData'));
+        if (items) {
+            setItem(items);
+        }
+      }, []);
+        const Remove = () => {
+        localStorage.removeItem('FormData');
+      
+    }
+    console.log(item)
     return (
         <Table>
             <thead>
@@ -28,10 +36,10 @@ export default function TableData() {
             <tbody>
 
                 {/* Loops require to render list */}
-                <tr key={"index"}>
-                    <td>{localStorage.getItem("UserName")}</td>
-                    <td>{localStorage.getItem("Email")}</td>
-                    <td>{localStorage.getItem("Password")}</td>
+                <tr>
+                    <td>{item.name}</td>
+                    <td>{item.email}</td>
+                    <td>{item.password}</td>
 
                     <td style={{ display: "flex" }} >
 

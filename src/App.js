@@ -15,8 +15,9 @@ function App() {
         <img src={logo} className="logo" alt="logo" />
         <NavbarComponent/>
       </header>
-      <SignUp />
       <TableData />
+      <SignUp />
+      
       {/* <PasswordValidation/> */}
     </>
   );

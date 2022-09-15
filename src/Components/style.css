@@ -1,26 +1,20 @@
-/* form.css */
-@media screen and (max-width: 500px) {
-    .SignIn-Modal {
-        width: 100%;
-    }
+
+*{
+    box-sizing: border-box;
 }
 
-@media screen and (max-width: 1000px) and (min-width: 500px) {
-    .SignUp-modal, .PasswordShow-eye {
-        width: 100%;
-    }
-}
+
 form {
     margin: 20px;
-  }
-  
-  .btn-update {
+}
+
+.btn-update {
     margin: 10px;
-  }
-  
-  .btn-submit {
+}
+
+.btn-submit {
     margin: 10px;
-  }
+}
 
 .SignUp-Modal {
     width: 30%;
@@ -47,17 +41,33 @@ Form Button {
     margin: auto;
     border: 2px solid gray;
     border-radius: 10px;
+    margin-top: 20px;
+
 }
 
 .SignUp-btn {
-    margin-left: 20px;
+    margin-left: 10px;
 }
-.PasswordShow-eye{
+
+.PasswordShow-eye {
     margin: -32px 0px 0px 340px;
 
 }
-.Re-PasswordShow-eye{
+
+.Re-PasswordShow-eye {
     margin: 0px 0px 10px 10px;
+}
+@media screen and (max-width: 1000px) and (min-width: 500px) {
+    .SignIn-Modal {
+        width: 90%;
+    }
+}
+
+@media screen and (max-width: 1000px) and (min-width: 500px) {
+
+    .SignUp-modal{
+        width: 90%;
+    }
 }
 
 /* Table.css */
@@ -81,4 +91,27 @@ Table thead tr th {
     text-align: center;
 }
 
-/* Navbar.css */
+/* Validation.css */
+.Validation-Container{
+    width: 30%;
+    align-items: center;
+    margin: auto;
+    border: 5px solid black;
+    border-radius: 10px;
+    margin-top: 20px;
+    box-sizing: border-box;
+}
+h1{
+    text-align: center;
+}
+.Validate-label{
+    width: 100%;
+    margin-left: 10px;
+}
+.Validate-input{
+    margin: 10px;
+    width: 90%;
+}
+.btn{
+    margin: 20px 20px;
+}
