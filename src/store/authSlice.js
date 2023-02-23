@@ -1,11 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { getLocalData, setLocalData } from "../Helper/storage";
+
 const user = getLocalData("user");
-let userLocal;
-if (user) {
-  userLocal = user.map((e) => e.email);
-}
-console.log(userLocal);
+// console.log("user ---", user);
+let users = user.map((item)=>item.email);
+// console.log("users ---", users);
 const initialState = {
   user: user | null,
   error: "",
@@ -22,36 +21,22 @@ const authSlice = createSlice({
         email: action.payload.data.email,
         password: action.payload.data.password,
       };
-      console.log("signUpData", signUpData);
 
-      let users = getLocalData("user");
-
-      if (!users) {
-        users = [];
+      if (user && user.length > 0) {
+        let index = users.indexOf(signUpData.email);
+        console.log("alreadyExits", index);
+        if (index < 0) {
+          user.push(signUpData);
+          setLocalData("user", user);
+          state.message = "Registration Successfully....";
+        } else {
+          state.message = "email already exits";
+        }
+      } else {
+        user.push(signUpData);
+        setLocalData("user", user);
+        state.message = "Registration Successfully....";
       }
-      debugger;
-      if (user) {
-        debugger;
-        userLocal.forEach((item) => {
-          console.log("item", item);
-
-          if (item != signUpData.email) {
-            debugger;
-            users.push(signUpData);
-            setLocalData("user", users);
-            state.message = "Registration Successfully....";
-            debugger;
-          } else {
-            debugger;
-            state.message = "account already exits...";
-            debugger;
-          }
-        });
-      }
-      debugger;
-      users.push(signUpData);
-      setLocalData("user", users);
-      state.message = "Registration Successfully....";
     },
 
     signIn: (state, action) => {
@@ -59,17 +44,9 @@ const authSlice = createSlice({
         email: action.payload.data.email,
         password: action.payload.data.password,
       };
-
-      if (
-        userLocal.email === obj.email &&
-        userLocal.password === obj.password
-      ) {
-        state.isLoggedIn = true;
-        state.message = "Login successfully";
-        state.user = obj;
-      } else {
-        state.message = "username & password not match";
-      }
+      state.isLoggedIn = true;
+      state.message = "Login successfully";
+      state.user = obj;
     },
 
     logout: (state) => {
