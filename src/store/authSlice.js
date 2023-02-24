@@ -43,7 +43,6 @@ const authSlice = createSlice({
     },
 
     signIn: (state, action) => {
-    
       const login = {
         email: action.payload.data.email,
         password: action.payload.data.password,
@@ -53,22 +52,21 @@ const authSlice = createSlice({
         let username = user.find((d) => d.email === login.email);
         if (username) {
           if (username.email !== login.email) {
-            state.message = "username not found";
+            state.message = "username incorrect try again...";
           } else if (username.password !== login.password) {
-            state.message = "password not found";
+            state.message = "password incorrect try again...";
           } else if (
             username.email !== login.email &&
             username.password !== login.password
           ) {
-            state.message = "username & password not found";
+            state.message = "username & password incorrect try again...";
           } else if (
             username.email === login.email &&
             username.password === login.password
           ) {
+            // state.user.isLoggedIn = true;
             state.message = "login successfully...";
-            localStorage.setItem("isLoggedIn", JSON.stringify(true));
-            
-            // isLoggedInUser ? : <Navigate to="/" />;
+            localStorage.setItem("isLoggedIn", true);
           }
         } else {
           state.message = "username not found";
@@ -79,9 +77,8 @@ const authSlice = createSlice({
     },
 
     logout: (state) => {
-      console.log("clickedd");
-      state.isLoggedIn = false;
-      state.user = null;
+      // console.log("clickedd");
+      // state.user.isLoggedIn = false;
       localStorage.removeItem("isLoggedIn");
     },
   },

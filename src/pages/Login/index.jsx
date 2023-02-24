@@ -1,16 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import "../../App.css";
 import { signIn, signUp } from "../../store/authSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-
+let isLogin = localStorage.getItem("isLoggedIn");
 function Login() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { error, message, status } = useSelector((state) => state.auth);
+  const { error, message, status} = useSelector((state) => state.auth);
   const [login, setLogin] = useState(false);
-  const [isLogin, setIsLogin] = useState("");
   // const [success, setSuccess] = useState(false);
   const {
     reset,
@@ -20,21 +19,20 @@ function Login() {
   } = useForm();
 
   const onSubmit = (data) => {
-    {
-      login
-        ? dispatch(signUp({ data }))
-        : dispatch(
-            signIn({ data }),
-            isLogin ? navigate("/dashboard") : navigate("/")
-          );
-    }
+    login
+      ? dispatch(signUp({ data }))
+      : dispatch(
+          signIn({ data }),
+          isLogin ? navigate("/dashboard") : navigate("/")
+        );
 
     reset();
   };
-  useEffect(() => {
-    const isLoggedIn = localStorage.getItem("isLoggedIn");
-    setIsLogin(isLoggedIn);
-  }, []);
+  // useEffect(() => {
+  //   debugger;
+  //   const isLoggedIn = localStorage.getItem("isLoggedIn");
+  //   setIsLogin(isLoggedIn);
+  // }, [signIn]);
   return (
     <>
       <div className="App">

@@ -17,23 +17,24 @@ const router = createBrowserRouter([
   {
     path: "/dashboard",
     element: <Navbar />,
+    
     children: [
       {
-        path: "dashboard/:home",
+        path: "home",
         element: <Home />,
       },
       {
-        path: "dashboard/:about",
+        path: "about",
         element: <About />,
       },
       {
-        path: "dashboard/:contact",
+        path: "contact",
         element: <Contact />,
-      },
+      }
     ],
   },
 ]);
 
-const App = () => <RouterProvider router={router} />;
+const App = () => <RouterProvider router={router} />
 
 export default App;

@@ -14,26 +14,26 @@ const Navbar = () => {
             <ul className="navbar-nav">
               <>
                 <li className="nav-item">
-                  <Link className="nav-link" to="/home">
+                  <Link className="nav-link" to="home">
                     Home
                   </Link>
                 </li>
 
                 <li className="nav-item">
-                  <Link className="nav-link" to="/about">
+                  <Link className="nav-link" to="about">
                     About
                   </Link>
                 </li>
 
                 <li className="nav-item">
-                  <Link className="nav-link" to="/contact">
+                  <Link className="nav-link" to="contact">
                     Contact
                   </Link>
                 </li>
                 <li className="nav-item">
                   <button
                     className="nav-link logout"
-                    onClick={(e) => dispatch(logout(e.target.value),navigate ("/"))}
+                    onClick={(e) => dispatch(logout(e.target.value),navigate('/'))}
                   >
                     Logout
                   </button>
