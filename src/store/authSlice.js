@@ -3,8 +3,7 @@ import { getLocalData, setLocalData } from "../Helper/storage";
 
 const user = getLocalData("user");
 // console.log("user ---", user);
-let users = user.map((item)=>item.email);
-// console.log("users ---", users);
+
 const initialState = {
   user: user | null,
   error: "",
@@ -23,9 +22,7 @@ const authSlice = createSlice({
       };
 
       if (user && user.length > 0) {
-        let index = users.indexOf(signUpData.email);
-        console.log("alreadyExits", index);
-        if (index < 0) {
+        if (user.filter((d) => d.email === signUpData.email).length < 1) {
           user.push(signUpData);
           setLocalData("user", user);
           state.message = "Registration Successfully....";
