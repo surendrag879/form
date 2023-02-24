@@ -1,24 +1,39 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Routes, Route } from "react-router-dom";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import Login from "../src/pages/Login/index";
+import ErrorPage from "../src/pages/errorPage";
 import Navbar from "../src/components/navbar";
-import Login from '../src/pages/Login/index';
 import Home from "../src/pages/Dashboard/home";
 import About from "../src/pages/Dashboard/about";
 import Contact from "../src/pages/Dashboard/contact";
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <Login />,
+    errorElement: <ErrorPage />,
+  },
 
+  {
+    path: "/dashboard",
+    element: <Navbar />,
+    children: [
+      {
+        path: "dashboard/:home",
+        element: <Home />,
+      },
+      {
+        path: "dashboard/:about",
+        element: <About />,
+      },
+      {
+        path: "dashboard/:contact",
+        element: <Contact />,
+      },
+    ],
+  },
+]);
 
-const App = () => {
-  return (
-    <>
-      <Navbar />
-      <Routes>
-        <Route path="/" element={<Login />} />
-        <Route path="/home" element={<Home />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/contact" element={<Contact />} />
-      </Routes>
-    </>
-  );
-};
+const App = () => <RouterProvider router={router} />;
+
 export default App;

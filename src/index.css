@@ -38,6 +38,9 @@ h3{
   text-align: center;
   color: red;
 }
-.logout{
-  float: right;
+
+
+#error-page{
+  text-align: center;
+  margin: 150px auto;
 }
