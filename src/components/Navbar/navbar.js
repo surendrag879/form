@@ -1,11 +1,15 @@
 import React from "react";
 import { Link, Outlet,useNavigate } from "react-router-dom";
-import { logout } from "../store/authSlice";
-import { useDispatch } from "react-redux";
+import { setLocalData } from "../../Helper/storage";
 
 const Navbar = () => {
+
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+
+const handleLogout = ()=>{
+  setLocalData('isLoggedIn',false);
+  navigate('/');
+}
   return (
     <>
       <nav className="navbar navbar-expand-xl navbar-light bg-light">
@@ -33,7 +37,7 @@ const Navbar = () => {
                 <li className="nav-item">
                   <button
                     className="nav-link logout"
-                    onClick={(e) => dispatch(logout(e.target.value),navigate('/'))}
+                    onClick={handleLogout}
                   >
                     Logout
                   </button>

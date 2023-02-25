@@ -1,0 +1,46 @@
+.App {
+  display: flex;
+  flex-direction: column;
+  margin: 100px auto;
+  width: 25vw;
+  height: auto;
+  padding: 1vw 1vw;
+  background-color: rgb(56, 55, 55);
+  border-radius: 0 0 10px 10px;
+}
+
+.title {
+  color: white;
+  text-align: center;
+  padding: 1vw 1vw;
+  font-size: 2rem;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+input {
+  border: 1px solid rgb(172, 171, 171);
+  border-radius: 10px;
+  padding: 1vw 1vw;
+  outline: none;
+  margin: 10px;
+}
+.account-register {
+  text-align: center;
+  font-size: 1.1em;
+  font-weight: 400;
+  color: white;
+}
+.account-register button {
+ 
+  border: none;
+  font-size: 1.1em;
+  background: transparent;
+  margin-left: 10px;
+  color: seagreen;
+  font-weight: 400;
+}
+.logout {
+  background: transparent;
+  outline: none;
+  border: none;
+}

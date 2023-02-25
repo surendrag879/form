@@ -1,16 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { getLocalData, setLocalData } from "../Helper/storage";
-const user = getLocalData("user");
-// console.log("user ---", user);
-// const isLoggedInUser = getLocalData("isLoggedIn");
-// console.log('isLoggedInUser',isLoggedInUser)
+
 
 const initialState = {
-  user: user,
-  status: "",
   error: "",
   message: "",
-  ...(user ? { isLoggedIn: true } : { isLoggedIn: false }),
 };
 
 const authSlice = createSlice({
@@ -18,31 +12,31 @@ const authSlice = createSlice({
   initialState,
   reducers: {
     signUp: (state, action) => {
+      let user = getLocalData("user");
       let signUpData = {
         name: action.payload.data.name,
         email: action.payload.data.email,
         password: action.payload.data.password,
       };
-
+      // console.log(signUpData)
+     
       if (user && user.length > 0) {
         if (user.filter((d) => d.email === signUpData.email).length < 1) {
           user.push(signUpData);
           setLocalData("user", user);
-          state.status = "success";
           state.message = "Registration Successfully....";
         } else {
-          state.status = "failed";
           state.error = "email already exits";
         }
       } else {
         user.push(signUpData);
         setLocalData("user", user);
-        state.status = "success";
         state.message = "Registration Successfully....";
       }
     },
 
     signIn: (state, action) => {
+      let user = getLocalData("user");
       const login = {
         email: action.payload.data.email,
         password: action.payload.data.password,
@@ -64,7 +58,6 @@ const authSlice = createSlice({
             username.email === login.email &&
             username.password === login.password
           ) {
-            // state.user.isLoggedIn = true;
             state.message = "login successfully...";
             localStorage.setItem("isLoggedIn", true);
           }
@@ -75,14 +68,8 @@ const authSlice = createSlice({
         state.message = "username & password not found";
       }
     },
-
-    logout: (state) => {
-      // console.log("clickedd");
-      // state.user.isLoggedIn = false;
-      localStorage.removeItem("isLoggedIn");
-    },
   },
 });
 
-export const { signUp, signIn, logout } = authSlice.actions;
+export const { signUp, signIn} = authSlice.actions;
 export default authSlice.reducer;
