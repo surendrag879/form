@@ -1,10 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { getLocalData, setLocalData } from "../Helper/storage";
-
-
 const initialState = {
-  error: "",
-  message: "",
+  error: null,
+  message: null,
+  isLoggedIn: "",
 };
 
 const authSlice = createSlice({
@@ -13,13 +12,13 @@ const authSlice = createSlice({
   reducers: {
     signUp: (state, action) => {
       let user = getLocalData("user");
+      // console.log('userLocalData', user);
       let signUpData = {
         name: action.payload.data.name,
         email: action.payload.data.email,
         password: action.payload.data.password,
       };
-      // console.log(signUpData)
-     
+
       if (user && user.length > 0) {
         if (user.filter((d) => d.email === signUpData.email).length < 1) {
           user.push(signUpData);
@@ -29,7 +28,9 @@ const authSlice = createSlice({
           state.error = "email already exits";
         }
       } else {
+        // console.log('signUp',signUpData);
         user.push(signUpData);
+        // console.log('user',user)
         setLocalData("user", user);
         state.message = "Registration Successfully....";
       }
@@ -41,9 +42,10 @@ const authSlice = createSlice({
         email: action.payload.data.email,
         password: action.payload.data.password,
       };
-
+      // console.log("signIn", login);
       if (user && user.length > 0) {
         let username = user.find((d) => d.email === login.email);
+        // console.log("username", username);
         if (username) {
           if (username.email !== login.email) {
             state.message = "username incorrect try again...";
@@ -59,17 +61,18 @@ const authSlice = createSlice({
             username.password === login.password
           ) {
             state.message = "login successfully...";
-            localStorage.setItem("isLoggedIn", true);
+            state.isLoggedIn = true;
+            setLocalData("isLoggedIn", true);
           }
         } else {
-          state.message = "username not found";
+          state.message = "account not found";
         }
       } else {
-        state.message = "username & password not found";
+        state.message = "Please register first after login";
       }
     },
   },
 });
 
-export const { signUp, signIn} = authSlice.actions;
+export const { signUp, signIn } = authSlice.actions;
 export default authSlice.reducer;

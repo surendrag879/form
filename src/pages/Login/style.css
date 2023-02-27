@@ -5,12 +5,12 @@
   width: 25vw;
   height: auto;
   padding: 1vw 1vw;
-  background-color: rgb(56, 55, 55);
+  /* background-color: rgb(56, 55, 55); */
   border-radius: 0 0 10px 10px;
 }
 
 .title {
-  color: white;
+  /* color: white; */
   text-align: center;
   padding: 1vw 1vw;
   font-size: 2rem;
@@ -28,7 +28,7 @@ input {
   text-align: center;
   font-size: 1.1em;
   font-weight: 400;
-  color: white;
+  /* color: white; */
 }
 .account-register button {
  

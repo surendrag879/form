@@ -1,16 +1,15 @@
-import React, { useState } from "react";
+import React, {useState } from "react";
 import "./style.css";
+import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { signIn, signUp } from "../../store/authSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
 
 function Login() {
-  let isLogin = localStorage.getItem("isLoggedIn");
   const dispatch = useDispatch();
   const navigate = useNavigate();
   let { error, message } = useSelector((state) => state.auth);
-  const [show, setShow] = useState(false);
+  const [registerShow, setRegisterShow] = useState(false);
   const {
     reset,
     register,
@@ -19,19 +18,20 @@ function Login() {
   } = useForm();
 
   const onSubmit = (data) => {
-    show
-      ? dispatch(signUp({ data }))
-      : dispatch(
-          signIn({ data }),
-          isLogin ? navigate("/dashboard") : navigate("/")
-        );
-
+    registerShow ? dispatch(signUp({ data })) : dispatch(signIn({ data }),navigate('/'));
     reset();
   };
-
+  // useEffect(() => {
+  //   let user = getLocalData("isLoggedIn");
+  //   if (!user) {
+  //     navigate("/login");
+  //   }else{
+  //     navigate('/navbar')
+  //   }
+  // }, [navigate]);
   return (
     <>
-      {show ? (
+      {registerShow ? (
         <form className="App" onSubmit={handleSubmit(onSubmit)}>
           <span className="title">Registration</span>
           {message ? (
@@ -72,7 +72,7 @@ function Login() {
           )}
           <span className="account-register">
             already have account?
-            <button onClick={() => setShow(false)}>Login</button>
+            <button onClick={() => setRegisterShow(false)}>Login</button>
           </span>
           <input type={"submit"} style={{ backgroundColor: "#a1eafb" }} />
         </form>
@@ -105,7 +105,7 @@ function Login() {
           )}
           <span className="account-register">
             don't have account?
-            <button onClick={() => setShow(true)}>registration</button>
+            <button onClick={() => setRegisterShow(true)}>registration</button>
           </span>
           <input type={"submit"} style={{ backgroundColor: "#a1eafb" }} />
         </form>

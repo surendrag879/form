@@ -21,3 +21,38 @@ code {
   flex-direction: row;
   gap: 2em;
 }
+
+/*login form */
+.loginForm{
+  display: flex;
+  width: 20%;
+  flex-direction: column;
+  margin:50px auto;
+  padding: 5px;
+}
+.loginForm h1{
+  margin-top: 20px;
+  text-align: center;
+}
+.loginForm input{
+  border-radius: 10px;
+  height: 30px;
+  outline: none;
+}
+button{
+  border-radius: 10px;
+  height: 40px;
+  padding: 10px;
+  cursor: pointer;
+}
+.loginForm .message{
+  text-align: center;
+  color: red;
+}
+ul{
+  list-style-type: none;
+}
+ul li a{
+
+  text-decoration: none;
+ }
