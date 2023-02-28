@@ -3,7 +3,7 @@ import { getLocalData, setLocalData } from "../Helper/storage";
 const initialState = {
   error: null,
   message: null,
-  isLoggedIn: "",
+  isLoggedIn: null,
 };
 
 const authSlice = createSlice({
@@ -14,6 +14,7 @@ const authSlice = createSlice({
       let user = getLocalData("user");
       // console.log('userLocalData', user);
       let signUpData = {
+        id: Date.now(),
         name: action.payload.data.name,
         email: action.payload.data.email,
         password: action.payload.data.password,

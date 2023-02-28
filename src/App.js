@@ -7,10 +7,11 @@ import Navbar from "../src/components/Navbar/navbar";
 import Home from "../src/pages/Dashboard/home";
 import About from "../src/pages/Dashboard/about";
 import Contact from "../src/pages/Dashboard/contact";
-import Service from "../src/pages/Dashboard/service";
+import Service from "./pages/Dashboard/userList";
 import Product from "../src/pages/Dashboard/product";
 import ProtectedRoute from "./Routes/protectedRoutes";
-
+// import Admin from "./pages/Dashboard/admin";
+// import Root from "./components/Sidebar/root";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -30,18 +31,28 @@ const router = createBrowserRouter([
     element: <About />,
   },
   {
-    path: "contact",
+    path: "/contact",
     element: <Contact />,
   },
   {
-    path:'/product',
-    element:<ProtectedRoute comp={Product} />
+    path: "/product",
+    element: (
+      <ProtectedRoute>
+        <Product />
+      </ProtectedRoute>
+    ),
   },
+
   {
-    path:'/service',
-    element:<ProtectedRoute comp={Service} />
-  }
+    path: "/userList",
+    element: (
+      <ProtectedRoute>
+        <Service />
+      </ProtectedRoute>
+    ),
+  },
 ]);
+
 const App = () => <RouterProvider router={router} />;
 
 export default App;

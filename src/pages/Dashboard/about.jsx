@@ -1,9 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import Navbar from "../../components/Navbar/navbar";
 
 const About = () => {
   return (
-    <div style={{ textAlign: "center" }}>
+    <>
+    <Navbar/>
+     <div style={{ textAlign: "center" }}>
       <h1>About Page</h1>
       <h3>Hello this is About page !</h3>
 
@@ -17,6 +20,8 @@ const About = () => {
         </li>
       </ul>
     </div>
+    </>
+   
   );
 };
 

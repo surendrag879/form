@@ -1,58 +1,73 @@
-body {
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  /* background-color: lightgray; */
+}
+
+body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
-.navbar{
+
+.navbar {
   display: flex;
   flex-direction: row;
   gap: 2em;
 }
 
 /*login form */
-.loginForm{
+.loginForm {
   display: flex;
   width: 20%;
   flex-direction: column;
-  margin:50px auto;
+  margin: 50px auto;
   padding: 5px;
 }
-.loginForm h1{
+.loginForm h1 {
   margin-top: 20px;
   text-align: center;
 }
-.loginForm input{
+.loginForm input {
   border-radius: 10px;
   height: 30px;
   outline: none;
 }
-button{
+button {
   border-radius: 10px;
   height: 40px;
   padding: 10px;
   cursor: pointer;
 }
-.loginForm .message{
+.loginForm .message {
   text-align: center;
   color: red;
 }
-ul{
+ul {
   list-style-type: none;
 }
-ul li a{
-
+ul li a {
   text-decoration: none;
- }
+}
+.errorPage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  margin-top: 200px;
+}
+.updateData{
+  display: flex;
+  flex-direction: column;
+}
+.updateData input{
+  height: 40px;
+}
