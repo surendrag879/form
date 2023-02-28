@@ -21,14 +21,7 @@ function Login() {
     registerShow ? dispatch(signUp({ data })) : dispatch(signIn({ data }),navigate('/'));
     reset();
   };
-  // useEffect(() => {
-  //   let user = getLocalData("isLoggedIn");
-  //   if (!user) {
-  //     navigate("/login");
-  //   }else{
-  //     navigate('/navbar')
-  //   }
-  // }, [navigate]);
+
   return (
     <>
       {registerShow ? (
@@ -45,7 +38,7 @@ function Login() {
             {...register("name", { required: true })}
           />
           {errors.name && (
-            <span style={{ color: "red" }}>This field is required</span>
+            <span style={{ color: "red" }}>*Name* is mandatory</span>
           )}
           <input
             type="email"
