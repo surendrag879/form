@@ -6,10 +6,14 @@ import { signIn, signUp } from "../../store/authSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 function Login() {
+  //redux
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  //state
   let { error, message } = useSelector((state) => state.auth);
   const [registerShow, setRegisterShow] = useState(false);
+
   const {
     reset,
     register,
@@ -17,6 +21,7 @@ function Login() {
     formState: { errors },
   } = useForm();
 
+  //function
   const onSubmit = (data) => {
     registerShow ? dispatch(signUp({ data })) : dispatch(signIn({ data }),navigate('/'));
     reset();

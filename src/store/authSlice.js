@@ -4,6 +4,7 @@ const initialState = {
   error: null,
   message: null,
   isLoggedIn: null,
+  status : 'idel'
 };
 
 const authSlice = createSlice({

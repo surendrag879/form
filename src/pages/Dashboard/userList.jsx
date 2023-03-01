@@ -1,13 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import {
   Dialog,
   DialogContent,
   DialogActions,
-  Button,
   DialogTitle,
 } from "@mui/material";
 import Navbar from "../../components/Navbar/navbar";
-import { getLocalData, setLocalData } from "../../Helper/storage";
+import { useDispatch, useSelector } from "react-redux";
+import { deleteData, updateData } from "../../store/listSlice";
 
 const Columns = [
   {
@@ -24,27 +24,30 @@ const Columns = [
   },
 ];
 export default function UserList() {
-  const [user, setUser] = useState(null);
+  //state
   const [isOpenModal, setIsOpenModal] = useState(false);
   const [dataSource, setDataSource] = useState("");
 
+  //redux
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.list.user);
+  console.log("user", user);
+
+  //function
   const handleChange = (e) => {
     setDataSource({
       ...dataSource,
       [e.target.name]: e.target.value,
     });
   };
+
   const edit = (row) => {
     setDataSource(row);
   };
-  const remove = (id) => {
-    const clone = [...user];
-    clone.splice(id, 1);
-    setLocalData("user", clone);
-  };
-
-  const handleModalState = () => {
-    setIsOpenModal(!isOpenModal);
+  const Delete = (idx) => {
+    if (window.confirm("Are you sure? delete")) {
+      dispatch(deleteData(idx));
+    }
   };
 
   const handleClose = () => {
@@ -52,30 +55,25 @@ export default function UserList() {
   };
 
   const handleUpdate = () => {
-    console.log(dataSource);
-    let cloneUsers = [...user];
-    const userIndex = cloneUsers.findIndex(cloneUser => cloneUser.id === dataSource.id);
-    console.log(userIndex);
-    cloneUsers[userIndex] = { ...dataSource }
-    setLocalData("user",cloneUsers);
+    if (window.confirm("Are you sure? update data")) {
+      dispatch(updateData(dataSource));
+    }
     handleClose();
   };
 
-  useEffect(() => {
-    let data = getLocalData("user");
-    setUser(data);
-  }, []);
-
+  const handleModalState = () => {
+    setIsOpenModal(!isOpenModal);
+  };
   return (
     <>
       <Navbar />
-      <div style={{ textAlign: "center", width: "50%" }}>
+      <div className="container-fluid" style={{ textAlign: "center" }}>
         <table className="table table-bordered">
           <thead className="table-dark">
             <tr>
-              <th colSpan={4}>User Registration Details</th>
+              <th colSpan={3}>User Registration Details</th>
             </tr>
-            <tr>
+            <tr className="table-light">
               {Columns.map((column, index) => (
                 <th key={index}>{column.label}</th>
               ))}
@@ -83,9 +81,9 @@ export default function UserList() {
           </thead>
           <tbody>
             {user && user.length > 0 ? (
-              user.map((row, index) => {
+              user.map((row, idx) => {
                 return (
-                  <tr key={index}>
+                  <tr key={idx}>
                     {Columns.map((column, index) => (
                       <td key={index}>
                         {column.id === "action" ? (
@@ -103,7 +101,7 @@ export default function UserList() {
                             <button
                               className="btn btn-outline-danger me-md-2"
                               onClick={() => {
-                                remove(row.id);
+                                Delete(idx);
                               }}
                             >
                               Delete
@@ -119,21 +117,26 @@ export default function UserList() {
               })
             ) : (
               <tr>
-                <td colSpan={4}>User Not Found</td>
+                <td colSpan={3}>User Not Found</td>
               </tr>
             )}
           </tbody>
         </table>
         <div>
           <Dialog
+            fullWidth={true}
+            maxWidth="sm"
             open={isOpenModal}
             onClose={handleClose}
             aria-labelledby="alert-dialog-title"
             aria-describedby="alert-dialog-description"
           >
             <DialogTitle id="alert-dialog-title">
-              {"Update user details"}
+              <span style={{ textAlign: "center", color: "lightblue" }}>
+                Update User Details
+              </span>
             </DialogTitle>
+
             <DialogContent>
               <div className="updateData">
                 Name:
@@ -143,12 +146,14 @@ export default function UserList() {
                   value={dataSource.name}
                   onChange={handleChange}
                 />
+                Email:
                 <input
                   name="email"
                   type={"text"}
                   value={dataSource.email}
                   onChange={handleChange}
                 />
+                Password:
                 <input
                   name="password"
                   type={"text"}
@@ -157,11 +162,18 @@ export default function UserList() {
                 />
               </div>
             </DialogContent>
+
             <DialogActions>
-              <Button onClick={handleClose}>Close</Button>
-              <Button onClick={handleUpdate} autoFocus>
+              <button
+                className="btn btn-outline-success"
+                onClick={handleUpdate}
+              >
                 Update
-              </Button>
+              </button>
+
+              <button className="btn btn-outline-danger" onClick={handleClose}>
+                Close
+              </button>
             </DialogActions>
           </Dialog>
         </div>
