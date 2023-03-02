@@ -1,0 +1,25 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "a node js ",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/surendrag879/nodeJS.git"
+  },
+  "keywords": [
+    "step",
+    "by",
+    "step",
+    "code"
+  ],
+  "author": "surendra",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/surendrag879/nodeJS/issues"
+  },
+  "homepage": "https://github.com/surendrag879/nodeJS#readme"
+}

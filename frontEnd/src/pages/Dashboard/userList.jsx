@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Dialog,
   DialogContent,
@@ -27,11 +27,11 @@ export default function UserList() {
   //state
   const [isOpenModal, setIsOpenModal] = useState(false);
   const [dataSource, setDataSource] = useState("");
+  // const [user, setUser] = useState("");
 
   //redux
   const dispatch = useDispatch();
   const user = useSelector((state) => state.list.user);
-  console.log("user", user);
 
   //function
   const handleChange = (e) => {
@@ -64,6 +64,9 @@ export default function UserList() {
   const handleModalState = () => {
     setIsOpenModal(!isOpenModal);
   };
+
+  useEffect(() => {
+  }, [dataSource]);
   return (
     <>
       <Navbar />
